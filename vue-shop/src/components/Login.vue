@@ -6,7 +6,8 @@
         <img src="../assets/logo.png" alt="">
       </div>
       <!-- 登录表单区域 -->
-      <el-form label-width="0px" class="login_form" :model="loginForm" :rules="loginFormRules">
+      <el-form label-width="0px" class="login_form" :model="loginForm"
+       :rules="loginFormRules" ref="loginFormRef">
         <!-- 用户名 -->
         <el-form-item prop="username">
           <el-input prefix-icon="el-icon-user-solid" v-model="loginForm.username"></el-input>
@@ -16,8 +17,8 @@
           <el-input prefix-icon="el-icon-lock" v-model="loginForm.password" type="password"></el-input>
         </el-form-item>
         <el-form-item class="btns">
-          <el-button type="primary">登录</el-button>
-          <el-button type="info">重置</el-button>
+          <el-button type="primary" @click="login">登录</el-button>
+          <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -29,8 +30,8 @@ export default {
     return {
       // 这是表单的数据绑定对象
       loginForm: {
-        username: 'zs',
-        password: '123'
+        username: 'admin',
+        password: '123456'
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -43,6 +44,27 @@ export default {
           { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    // 点击重置表单
+    resetLoginForm () {
+      this.$refs.loginFormRef.resetFields()
+    },
+    login () {
+      // 进行登录验证
+      this.$refs.loginFormRef.validate(async valid => {
+        if (!valid) return
+        const { data: res } = await this.$http.post('login', this.loginForm)
+        if (res.meta.status !== 200) return this.$message.error('登录失败！')
+        this.$message.success('登录成功！')
+        // 将登陆成功后的token保存在sessionStorage中
+        // 项目除了登陆之外的API接口，只有在登陆成功之后才能访问
+        // token只在当前网页打开期间生效，所以使用sessionStorage
+        window.sessionStorage.setItem('token', res.data.token)
+        // 登陆成功通过编程式导航跳转到/home
+        this.$router.push('/home')
+      })
     }
   }
 }
