@@ -10,11 +10,11 @@
        :rules="loginFormRules" ref="loginFormRef">
         <!-- 用户名 -->
         <el-form-item prop="username">
-          <el-input prefix-icon="el-icon-user-solid" v-model="loginForm.username"></el-input>
+          <el-input prefix-icon="iconfont icon-user" v-model="loginForm.username"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input prefix-icon="el-icon-lock" v-model="loginForm.password" type="password"></el-input>
+          <el-input prefix-icon="iconfont icon-3702mima" v-model="loginForm.password" type="password"></el-input>
         </el-form-item>
         <el-form-item class="btns">
           <el-button type="primary" @click="login">登录</el-button>
