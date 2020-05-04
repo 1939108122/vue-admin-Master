@@ -91,6 +91,7 @@ export default {
         label:'cat_name',
         children:'children',
         expandTrigger: 'hover',
+         // 父子节点不互相关联
         checkStrictly: true
       },
       // 父级分类的列表数组
