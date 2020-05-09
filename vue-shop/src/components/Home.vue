@@ -3,7 +3,7 @@
     <!-- 头部区域 -->
     <el-header>
       <div>
-        <img src="../assets/heima.png" alt="">
+        <img src="../assets/champion.jpg" alt="">
         <span>电商后台管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button></el-header>
@@ -18,7 +18,7 @@
         <el-menu
         background-color="#333744"
         text-color="#fff"
-        active-text-color="#409EFF" unique-opened :collapse="isCollapse" 
+        active-text-color="#409EFF" unique-opened :collapse="isCollapse"
         :collapse-transition="false" router :default-active= "activePath">
           <!-- 一级菜单 -->
           <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
@@ -27,8 +27,8 @@
             <span>{{ item.authName }}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item :index=" '/' + subItem.path" v-for="subItem in item.children" 
-            :key="subItem.id" @click="saveNavState('/' + subItem.path)"> 
+            <el-menu-item :index=" '/' + subItem.path" v-for="subItem in item.children"
+            :key="subItem.id" @click="saveNavState('/' + subItem.path)">
               <template slot="title">
               <i class="el-icon-menu"></i>
               <span>{{ subItem.authName }}</span>
@@ -51,11 +51,11 @@ export default {
     return {
       menulist: [],
       iconsObj: {
-        '125': 'iconfont icon-user',
-        '103': 'iconfont icon-tijikongjian',
-        '101': 'iconfont icon-shangpin',
-        '102': 'iconfont icon-danju',
-        '145': 'iconfont icon-baobiao',
+        125: 'iconfont icon-user',
+        103: 'iconfont icon-tijikongjian',
+        101: 'iconfont icon-shangpin',
+        102: 'iconfont icon-danju',
+        145: 'iconfont icon-baobiao',
       },
       isCollapse: false,
       activePath: ''
