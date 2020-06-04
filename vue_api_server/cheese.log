@@ -341,3 +341,7 @@
 [2020-06-04T09:47:41.273] [DEBUG] cheese - admin
 [2020-06-04T09:47:41.275] [DEBUG] cheese - null
 [2020-06-04T09:47:41.276] [DEBUG] cheese - null
+[2020-06-04T10:04:36.541] [DEBUG] cheese - login => username:admin,password:123456
+[2020-06-04T10:04:36.542] [DEBUG] cheese - admin
+[2020-06-04T10:04:36.554] [DEBUG] cheese - null
+[2020-06-04T10:04:36.555] [DEBUG] cheese - null
