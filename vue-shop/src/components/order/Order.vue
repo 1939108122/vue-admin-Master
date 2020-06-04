@@ -10,15 +10,15 @@
     <el-card>
       <el-row>
         <el-col :span="8">
-          <el-input placeholder="请输入内容">
-            <el-button icon="el-icon-search" slot="append"></el-button>
-          </el-input>
+         <el-input placeholder="请输入内容" v-model="queryInfo.query" clearable @clear="getOrderList">
+              <el-button slot="append" icon="el-icon-search" @click="getOrderList"></el-button>
+            </el-input>
         </el-col>
       </el-row>
       <!-- 订单表格 -->
       <el-table :data="orderlist" border stripe>
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="订单编号" prop="order_name"></el-table-column>
+        <el-table-column label="订单编号" prop="order_number"></el-table-column>
         <el-table-column label="订单价格" prop="order_price"></el-table-column>
         <el-table-column label="是否付款" prop="pay_status">
           <template slot-scope="scope">
@@ -129,12 +129,18 @@ export default {
   },
   methods: {
     // 获取所有订单
-    async getOrderList() {
-      const { data: res } = await this.$http.get('orders', { params: this.queryInfo })
-      if (res.meta.status !== 200) return this.$message.error('获取订单列表失败！')
+     async getOrderList() {
+      const {data: res} = await this.$http.get('orders', {params: this.queryInfo})
+      if (res.meta.status !== 200) 
+      {
+        return this.$message.error('获取订单列表失败！')
+      }
+      // 将获取数据赋值给orderlist
       this.orderlist = res.data.goods
+      console.log(this.orderlist)
+      console.log(this.queryInfo.query)
+      // 赋值商品总条数
       this.total = res.data.total
-      console.log(res)
     },
       handleSizeChange(newSize)
     {
@@ -160,6 +166,7 @@ export default {
       {
         return this.$message.error('获取物流进度失败！')
       }
+      console.log(res.data)
       this.progressInfo = res.data
       this.progressVisible = true
     }
